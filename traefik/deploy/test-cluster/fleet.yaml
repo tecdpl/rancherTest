@@ -1,0 +1,15 @@
+#User Guide fleet
+# https://fleet.rancher.io/gitrepo-structure/
+# exemples https://github.com/rancher/fleet-examples
+defaultNamespace: traefik
+helm:
+  releaseName: traefik
+  repo: "https://traefik.github.io/charts"
+  chart: traefik
+  force: false
+  version: 32.1.1
+  valuesFiles: 
+    - values.yaml
+
+
+    
