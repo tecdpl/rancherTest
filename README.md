@@ -2,11 +2,11 @@
 
 Instale o Docker
 
-mkdir -p /srv/rancher-persisted
+mkdir -p $HOME/rancher
 
 docker network create rancher-network
 
-docker run --name rancher-server -d -v /srv/rancher-persisted:/var/lib/rancher \
+docker run --name rancher-server -d -v $HOME/rancher:/var/lib/rancher \
 --restart=unless-stopped \
 -p 80:80 -p 443:443 \
 --network=rancher-network \
