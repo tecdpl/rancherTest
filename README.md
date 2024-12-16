@@ -1,19 +1,20 @@
-# Configuração do Ambiente Rancher com Workers
+# Host principal
+brew install multipass
+multipass launch --name rancher --cpus 6 --memory 6G --disk 30G
+multipass launch --name work1 --cpus 2 --memory 2G --disk 10G
+multipass shell rancher
+multipass shell work1
 
-```bash
-mkdir -p $HOME/rancher
+# VM Rancher
+sudo apt  install docker.io -y
+sudo usermod -aG docker ubuntu
+newgrp docker
 
-docker network create rancher-network
+docker run --name rancher -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged rancher/rancher:v2.9.2
+docker logs rancher 2>&1 | grep "Bootstrap Password:"
 
-docker run --name rancher-server -d -v $HOME/rancher:/var/lib/rancher \
---restart=unless-stopped \
--p 80:80 -p 443:443 \
---network=rancher-network \
---privileged \
-rancher/rancher:v2.9.2
-
-docker run -d --name worker1 --privileged --network=rancher-network \
---restart=unless-stopped ubuntu:20.04 sleep infinity
-
-docker run -d --name worker2 --privileged --network=rancher-network \
---restart=unless-stopped ubuntu:20.04 sleep infinity
+# Host principal
+echo "192.168.64.X nginx-app.demo.home.arpa" | sudo tee -a /etc/hosts
+multipass delete rancher
+multipass delete work1
+multipass purge
