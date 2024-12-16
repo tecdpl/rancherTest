@@ -1,7 +1,6 @@
-# rancherTest
+# Configuração do Ambiente Rancher com Workers
 
-Instale o Docker
-
+```bash
 mkdir -p $HOME/rancher
 
 docker network create rancher-network
