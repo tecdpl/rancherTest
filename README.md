@@ -1,4 +1,4 @@
-# Configuração de Ambiente com Multipass e Rancher par teste
+# Configuração de Ambiente com Multipass e Rancher para teste
 
 ## Host Principal
 ```bash
